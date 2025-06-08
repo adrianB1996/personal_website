@@ -34,7 +34,7 @@ export function Navbar() {
     <div className="fixed top-0 left-0 right-0 bg-background z-50 border-b shadow-sm">
       <div className="container mx-auto py-2">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold">Adrian Portfolio Site</h1>
+          <h1 className="text-xl font-bold">Adrian Bourke | Data & AI Engineering</h1>
           <div className="relative">
             <NavigationMenu>
               <NavigationMenuList>

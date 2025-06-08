@@ -138,6 +138,8 @@ const AboutPage = () => {
 									"Neo4j",
 									"Docker",
 									"Azure",
+									"LangChain",
+									"DaisyUI",
 								].map((skill) => (
 									<Badge key={skill} variant="secondary">
 										{skill}
@@ -163,6 +165,10 @@ const AboutPage = () => {
 									"proteomics",
 									"machine learning",
 									"NLP",
+									"TensorFlow",
+									"Keras",
+									"scikit-learn",
+									"Nextflow",
 								].map((skill) => (
 									<Badge key={skill} variant="secondary">
 										{skill}
