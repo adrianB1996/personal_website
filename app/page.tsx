@@ -2,32 +2,21 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
 	Card,
 	CardContent,
 	CardHeader,
 	CardTitle,
 	CardDescription,
-	CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-	Tabs,
-	TabsContent,
-	TabsList,
-	TabsTrigger,
-} from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Mail, Linkedin, Calendar, ExternalLink } from "lucide-react";
+import { MapPin, Mail, Linkedin, Calendar } from "lucide-react";
 
 const AboutPage = () => {
 	return (
 		<div className="container mx-auto px-4 py-24 space-y-10">
-			{/* Let's Connect - Moved to top */}
-
-
 			{/* Hero Section with Photo */}
 			<div className="flex flex-col lg:flex-row items-center gap-8">
 				<div className="w-full lg:w-1/3 flex flex-col items-center">
@@ -49,7 +38,7 @@ const AboutPage = () => {
 				</div>
 				<div className="w-full lg:w-2/3">
 					<h1 className="text-3xl md:text-4xl font-bold mb-4">
-						Hi, I'm Adrian
+						Hi, I&apos;m Adrian
 					</h1>
 					<p className="text-lg text-muted-foreground mb-4">
 						I started my journey in science with a degree in Biotechnology at
@@ -71,14 +60,14 @@ const AboutPage = () => {
 
       			<Card>
 				<CardHeader className="text-center">
-					<CardTitle>Let's Connect!</CardTitle>
+					<CardTitle>Let&apos;s Connect!</CardTitle>
 				</CardHeader>
 				<CardContent className="text-center">
 					<p className="mb-6">
-						I'm passionate about building digital health solutions and AI-powered
+						I&apos;m passionate about building digital health solutions and AI-powered
 						tools that help clinicians and engineers work smarter. I love
 						collaborating on projects at the intersection of data science and
-						software, and I'm always open to new challenges.
+						software, and I&apos;m always open to new challenges.
 					</p>
 
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -257,8 +246,11 @@ const AboutPage = () => {
 						</CardHeader>
 						<CardContent>
 							<ul className="list-disc pl-5 space-y-2">
-								<li>Optimized omics pipelines for drug discovery</li>
-								<li>Built knowledge graph systems with Neo4j and NLP</li>
+								<li>Converted R pipelines to Python for omics data analysis, optimizing workflows for drug discovery</li>
+								<li>Engaged with wet lab scientists to understand novel technologies and analysis requirements</li>
+								<li>Built a dashboard leveraging a knowledge graph using NLP which allowed teams of consultants to be built based on expertise and experience</li>
+								<li>Designed the deployment strategy for a knowledge Graph and Dash app on Azure</li>
+								<li>Built knowledge graph systems with Neo4j and implemented NLP techniques for data extraction</li>
 								<li>Created interactive dashboards and implemented Azure CI/CD pipelines</li>
 							</ul>
 						</CardContent>

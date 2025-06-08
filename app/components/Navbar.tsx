@@ -14,7 +14,7 @@ import {
 const projects = [
   {
     title: "SmartGP",
-    href: "/projects/smartgp",
+    href: "/projects/SmartGP",
     description: "AI-powered platform to enhance GP workflows and improve patient care.",
   },
   {
@@ -38,6 +38,11 @@ export function Navbar() {
           <div className="relative">
             <NavigationMenu>
               <NavigationMenuList>
+                                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link href="/">About Me</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Projects</NavigationMenuTrigger>
                   <NavigationMenuContent className="right-0 w-[200px] md:w-[250px] lg:w-[200px] max-w-[90vw]">
@@ -57,11 +62,7 @@ export function Navbar() {
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                    <Link href="/">About Me</Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
+
               </NavigationMenuList>
             </NavigationMenu>
           </div>
