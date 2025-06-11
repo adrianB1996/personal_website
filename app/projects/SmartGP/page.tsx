@@ -12,6 +12,7 @@ import {
 // Remove unused Badge import
 import { Separator } from "@/components/ui/separator";
 // Remove unused Accordion imports
+import { MermaidDiagram } from "@/app/components/MermaidDiagram";
 
 import {
   CheckCircle,
@@ -32,6 +33,24 @@ const PlaceholderImage = ({ caption, aspectRatio = "aspect-video" }: { caption: 
         className={`w-full ${aspectRatio} bg-muted border-2 border-dashed border-primary/50 rounded-lg flex items-center justify-center`}
       >
         <p className="text-muted-foreground text-sm">Placeholder Image</p>
+      </div>
+      <p className="text-sm text-muted-foreground italic">{caption}</p>
+    </div>
+  );
+};
+
+// Add a new YouTube embed component
+const YouTubeEmbed = ({ videoId, caption }: { videoId: string, caption: string }) => {
+  return (
+    <div className="flex flex-col items-center gap-2 my-6">
+      <div className="w-full aspect-video rounded-lg overflow-hidden">
+        <iframe 
+          className="w-full h-full"
+          src={`https://www.youtube.com/embed/${videoId}`}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
       </div>
       <p className="text-sm text-muted-foreground italic">{caption}</p>
     </div>
@@ -71,7 +90,11 @@ const SmartGPPage = () => {
             </p>
           </div>
           <div>
-            <PlaceholderImage caption="Inspired by real-world challenges in primary care" />
+            {/* Replace the placeholder with YouTube embed */}
+            <YouTubeEmbed 
+              videoId="ZIsaEkMZYcg" // Replace with your actual YouTube video ID
+              caption="Inspired by real-world challenges in primary care" 
+            />
           </div>
         </div>
       </section>
@@ -134,7 +157,25 @@ const SmartGPPage = () => {
         </div>
         
         <div className="mt-8">
-          <PlaceholderImage caption="SmartGP streamlines the clinical workflow" />
+          <MermaidDiagram
+            chart={`
+flowchart LR
+    Patient(Patient) <--> Doctor(Doctor)
+    Doctor --> Transcription(Speech-to-Text)
+    Transcription --> Summary(Patient Summary)
+    Summary --> Questions(Doctor Questions)
+    Questions --> Insights(Clinical Insights)
+    Summary --> Referral(Referral Letter)
+    
+    style Patient fill:#f9d6d6
+    style Doctor fill:#d6e5f9
+    style Transcription fill:#d6f9f2,stroke:#0fb
+    style Summary fill:#d6f9f2,stroke:#0fb
+    style Insights fill:#d6f9f2,stroke:#0fb
+    style Referral fill:#d6f9f2,stroke:#0fb
+            `}
+            caption="SmartGP streamlines the clinical workflow by automating transcription, summarization, information retrieval, and referral generation"
+          />
         </div>
       </section>
 
