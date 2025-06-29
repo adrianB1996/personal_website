@@ -308,7 +308,7 @@ const AboutPage = () => {
 						<CardContent className="text-center">
 							<p className="mb-4">
 								Created an RNA-seq analysis course during lockdown, attracting
-								over 500 students
+								over 1200 students
 							</p>
 						</CardContent>
 					</Card>

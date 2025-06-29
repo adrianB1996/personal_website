@@ -255,7 +255,14 @@ flowchart LR
           </div>
         </div>
 
-        <PlaceholderImage caption="SmartGP technical architecture" />
+        <div className="flex flex-col items-center gap-2 my-6">
+          <img 
+            src="/SmartGP.jpg" 
+            alt="SmartGP home page screenshot"
+            className="w-full max-w-4xl rounded-lg shadow-lg"
+          />
+          <p className="text-sm text-muted-foreground italic">SmartGP Home Page</p>
+        </div>
       </section>
 
       <Separator />
@@ -275,10 +282,14 @@ flowchart LR
             <CardContent className="space-y-2 text-center">
               <p>Whisper-based speech-to-text</p>
               <p>Speaker separation for clarity</p>
-              <PlaceholderImage
-                caption="Automatic, speaker-labelled transcripts"
-                aspectRatio="aspect-[4/3]"
-              />
+              <div className="flex flex-col items-center gap-2 my-6">
+                <img 
+                  src="/transcription.jpg" 
+                  alt="Automatic, speaker-labelled transcripts"
+                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg"
+                />
+                <p className="text-sm text-muted-foreground italic">Automatic, patient summary</p>
+              </div>
             </CardContent>
           </Card>
           
@@ -292,10 +303,14 @@ flowchart LR
             <CardContent className="space-y-2 text-center">
               <p>Referral letters generated using official guidelines</p>
               <p>Future: Personalized letter styles</p>
-              <PlaceholderImage
-                caption="One-click, guideline-based referrals"
-                aspectRatio="aspect-[4/3]"
-              />
+              <div className="flex flex-col items-center gap-2 my-6">
+                <img 
+                  src="/refferal_letter.jpg" 
+                  alt="One-click, guideline-based referrals"
+                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg"
+                />
+                <p className="text-sm text-muted-foreground italic">One-click, guideline-based referrals</p>
+              </div>
             </CardContent>
           </Card>
           
@@ -312,10 +327,14 @@ flowchart LR
                 formulates Google search queries to find relevant information for
                 the GP
               </p>
-              <PlaceholderImage
-                caption="Instant answers, powered by search"
-                aspectRatio="aspect-[4/3]"
-              />
+              <div className="flex flex-col items-center gap-2 my-6">
+                <img 
+                  src="/chat-bot.jpg" 
+                  alt="Instant answers, powered by search"
+                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg"
+                />
+                <p className="text-sm text-muted-foreground italic">Instant answers, powered by search</p>
+              </div>
             </CardContent>
           </Card>
         </div>
