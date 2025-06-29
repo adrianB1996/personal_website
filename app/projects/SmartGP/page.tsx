@@ -26,18 +26,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-const PlaceholderImage = ({ caption, aspectRatio = "aspect-video" }: { caption: string, aspectRatio?: string }) => {
-  return (
-    <div className="flex flex-col items-center gap-2 my-6">
-      <div
-        className={`w-full ${aspectRatio} bg-muted border-2 border-dashed border-primary/50 rounded-lg flex items-center justify-center`}
-      >
-        <p className="text-muted-foreground text-sm">Placeholder Image</p>
-      </div>
-      <p className="text-sm text-muted-foreground italic">{caption}</p>
-    </div>
-  );
-};
 
 // Add a new YouTube embed component
 const YouTubeEmbed = ({ videoId, caption }: { videoId: string, caption: string }) => {
