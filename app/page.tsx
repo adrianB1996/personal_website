@@ -219,8 +219,9 @@ const AboutPage = () => {
 									Leading team upskilling in TypeScript, React, and Next.js
 								</li>
 								<li>
-									Developing a company-wide time booking application (Next.js
-									frontend, FastAPI backend, SQL database)
+									Architected an AI-driven Retrieval-Augmented Generation (RAG) 
+									system using Azure AI Foundry, Python, and JavaScript, implementing 
+									semantic search and AI-powered filtering to elevate document discovery
 								</li>
 								<li>
 									Conducting large-scale data auditing and analytics solution

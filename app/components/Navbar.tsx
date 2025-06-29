@@ -16,7 +16,7 @@ const projects = [
     title: "SmartGP",
     href: "/projects/SmartGP",
     description: "AI-powered platform to enhance GP workflows and improve patient care.",
-  // },
+  },
   // {
   //   title: "Aesthetics Website",
   //   href: "/projects/aesthetics",
