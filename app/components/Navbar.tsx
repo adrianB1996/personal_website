@@ -16,17 +16,17 @@ const projects = [
     title: "SmartGP",
     href: "/projects/SmartGP",
     description: "AI-powered platform to enhance GP workflows and improve patient care.",
-  },
-  {
-    title: "Aesthetics Website",
-    href: "/projects/aesthetics",
-    description: "Modern, responsive website for an aesthetics clinic with booking functionality.",
-  },
-  {
-    title: "Health Knowledge Graph",
-    href: "/projects/knowledge-graph",
-    description: "Comprehensive health data visualization using knowledge graph technology.",
-  },
+  // },
+  // {
+  //   title: "Aesthetics Website",
+  //   href: "/projects/aesthetics",
+  //   description: "Modern, responsive website for an aesthetics clinic with booking functionality.",
+  // },
+  // {
+  //   title: "Health Knowledge Graph",
+  //   href: "/projects/knowledge-graph",
+  //   description: "Comprehensive health data visualization using knowledge graph technology.",
+  // },
 ];
 
 export function Navbar() {
