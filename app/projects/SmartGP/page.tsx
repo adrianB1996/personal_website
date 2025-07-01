@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 // Import is used by PlaceholderImage component
 import {
   Card,
@@ -24,6 +24,7 @@ import {
   // Remove unused ArrowRight
   Server,
   ChevronRight,
+  X,
 } from "lucide-react";
 
 
@@ -45,9 +46,65 @@ const YouTubeEmbed = ({ videoId, caption }: { videoId: string, caption: string }
   );
 };
 
+// Image Modal component
+const ImageModal = ({ 
+  isOpen, 
+  onClose, 
+  imageSrc, 
+  imageAlt 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  imageSrc: string; 
+  imageAlt: string; 
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div className="relative max-w-4xl max-h-full">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+        >
+          <X className="h-8 w-8" />
+        </button>
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="max-w-full max-h-full object-contain rounded-lg"
+          onClick={(e) => e.stopPropagation()}
+        />
+      </div>
+    </div>
+  );
+};
+
 const SmartGPPage = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState({ src: "", alt: "" });
+
+  const openModal = (src: string, alt: string) => {
+    setModalImage({ src, alt });
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalImage({ src: "", alt: "" });
+  };
+
   return (
     <div className="container mx-auto px-4 py-24 space-y-16">
+      <ImageModal
+        isOpen={modalOpen}
+        onClose={closeModal}
+        imageSrc={modalImage.src}
+        imageAlt={modalImage.alt}
+      />
       <div className="max-w-3xl mx-auto text-center space-y-4">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">SmartGP</h1>
         <p className="text-xl text-muted-foreground">
@@ -247,7 +304,8 @@ flowchart LR
           <img 
             src="/SmartGP.jpg" 
             alt="SmartGP home page screenshot"
-            className="w-full max-w-4xl rounded-lg shadow-lg"
+            className="w-full max-w-4xl rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+            onClick={() => openModal("/SmartGP.jpg", "SmartGP home page screenshot")}
           />
           <p className="text-sm text-muted-foreground italic">SmartGP Home Page</p>
         </div>
@@ -274,7 +332,8 @@ flowchart LR
                 <img 
                   src="/transcription.jpg" 
                   alt="Automatic, speaker-labelled transcripts"
-                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg"
+                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                  onClick={() => openModal("/transcription.jpg", "Automatic, speaker-labelled transcripts")}
                 />
                 <p className="text-sm text-muted-foreground italic">Automatic, patient summary</p>
               </div>
@@ -295,7 +354,8 @@ flowchart LR
                 <img 
                   src="/refferal_letter.jpg" 
                   alt="One-click, guideline-based referrals"
-                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg"
+                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                  onClick={() => openModal("/refferal_letter.jpg", "One-click, guideline-based referrals")}
                 />
                 <p className="text-sm text-muted-foreground italic">One-click, guideline-based referrals</p>
               </div>
@@ -319,7 +379,8 @@ flowchart LR
                 <img 
                   src="/chat-bot.jpg" 
                   alt="Instant answers, powered by search"
-                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg"
+                  className="w-3/4 max-w-xs aspect-[4/3] object-cover rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                  onClick={() => openModal("/chat-bot.jpg", "Instant answers, powered by search")}
                 />
                 <p className="text-sm text-muted-foreground italic">Instant answers, powered by search</p>
               </div>
