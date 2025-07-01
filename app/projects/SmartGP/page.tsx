@@ -137,7 +137,7 @@ const SmartGPPage = () => {
           <div>
             {/* Replace the placeholder with YouTube embed */}
             <YouTubeEmbed 
-              videoId="ZIsaEkMZYcg" // Replace with your actual YouTube video ID
+              videoId="AiYehmA-W48" // Replace with your actual YouTube video ID
               caption="Inspired by real-world challenges in primary care" 
             />
           </div>
