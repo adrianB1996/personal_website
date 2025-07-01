@@ -67,7 +67,7 @@ const AboutPage = () => {
 						I&apos;m passionate about building digital health solutions and AI-powered
 						tools that help clinicians and engineers work smarter. I love
 						collaborating on projects at the intersection of data science and
-						software, and I&apos;m always open to new challenges.
+						software, and I&apos;m always open to connecting.
 					</p>
 
 					<div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
