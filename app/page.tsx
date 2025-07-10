@@ -207,25 +207,22 @@ const AboutPage = () => {
 						<CardContent>
 							<ul className="list-disc pl-5 space-y-2">
 								<li>
-									Designing and prototyping data-driven services for
-									next-generation power stations
+									Designed and prototyping of digital services for next-generation small modular reactor power stations, presenting solutions to clients and securing stakeholder alignment
 								</li>
 								<li>
-									Building Document Retrieval-Augmented Generation (RAG)
-									systems using Azure architecture to deliver targeted,
-									business-focused solutions
+									Architected an AI-driven Retrieval-Augmented Generation (RAG) system using Azure AI Foundry, Python, and JavaScript, implementing semantic search and AI-powered filtering to elevate document discovery
 								</li>
 								<li>
-									Leading team upskilling in TypeScript, React, and Next.js
+									Built and maintained Azure infrastructure for rapid prototyping, including VM provisioning, secure data storage, and environment orchestration
 								</li>
 								<li>
-									Architected an AI-driven Retrieval-Augmented Generation (RAG) 
-									system using Azure AI Foundry, Python, and JavaScript, implementing 
-									semantic search and AI-powered filtering to elevate document discovery
+									Champion team skill development in TypeScript, React, and Next.js through hands-on mentoring, code reviews, and knowledge-sharing workshops
 								</li>
 								<li>
-									Conducting large-scale data auditing and analytics solution
-									development
+									Enforced code quality standards by integrating TypeScript linters, formatters, and Git hooks into the CI/CD pipeline to ensure consistency and maintainability
+								</li>
+								<li>
+									Collaborated with cross-functional teams to translate complex technical concepts into clear, actionable roadmaps for digital transformation initiatives
 								</li>
 							</ul>
 						</CardContent>
