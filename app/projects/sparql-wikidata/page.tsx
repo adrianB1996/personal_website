@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
@@ -228,7 +229,7 @@ export default function SparqlWikidataPage() {
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">SPARQL Wikidata Explorer</h1>
         <p className="text-xl text-muted-foreground">
           An intuitive interface that leverages small, offline LLMs to transform natural language into SPARQL queries, 
-          making Wikidata's knowledge graph accessible without specialized expertise.
+          making Wikidata&apos;s knowledge graph accessible without specialized expertise.
         </p>
       </div>
 
