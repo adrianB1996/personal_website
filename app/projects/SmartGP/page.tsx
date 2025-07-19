@@ -65,6 +65,8 @@ const ImageModal = ({
   // Define refs before conditional returns
   const touchStartDistance = useRef(0);
   const touchStartScale = useRef(1);
+  const [lastMousePosition, setLastMousePosition] = useState({ x: 0, y: 0 });
+  const [lastTouchPosition, setLastTouchPosition] = useState({ x: 0, y: 0 });
 
   // Reset zoom state when modal opens/closes
   useEffect(() => {
@@ -88,6 +90,7 @@ const ImageModal = ({
     if (e.button !== 0) return; // Only left mouse button
     e.preventDefault();
     setPanning(true);
+    setLastMousePosition({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseUp = () => {
@@ -97,23 +100,34 @@ const ImageModal = ({
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!panning) return;
     
-    const mouseDeltaX = e.movementX;
-    const mouseDeltaY = e.movementY;
+    // Calculate the delta between current mouse position and last recorded position
+    const deltaX = e.clientX - lastMousePosition.x;
+    const deltaY = e.clientY - lastMousePosition.y;
     
+    // Update position based on the delta, scaled by zoom level
     setPosition(prev => ({
-      x: prev.x + mouseDeltaX,
-      y: prev.y + mouseDeltaY
+      x: prev.x + deltaX / scale,
+      y: prev.y + deltaY / scale
     }));
+    
+    // Update last mouse position
+    setLastMousePosition({ x: e.clientX, y: e.clientY });
   };
 
-  // Touch event handlers for mobile pinch zoom
+  // Touch event handlers for mobile pinch zoom and panning
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 2) {
-      // Calculate initial distance between two fingers
+      // Calculate initial distance between two fingers for pinch zoom
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       touchStartDistance.current = Math.sqrt(dx * dx + dy * dy);
       touchStartScale.current = scale;
+    } else if (e.touches.length === 1) {
+      // Record the starting position for single-finger pan
+      setLastTouchPosition({
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY
+      });
     }
   };
 
@@ -121,30 +135,37 @@ const ImageModal = ({
     e.preventDefault(); // Prevent scrolling while interacting with image
     
     if (e.touches.length === 2) {
-      // Calculate new distance between two fingers
+      // Pinch zoom logic (unchanged)
       const dx = e.touches[0].clientX - e.touches[1].clientX;
       const dy = e.touches[0].clientY - e.touches[1].clientY;
       const distance = Math.sqrt(dx * dx + dy * dy);
       
-      // Calculate new scale based on distance change
       const scaleChange = distance / touchStartDistance.current;
       const newScale = Math.min(Math.max(0.5, touchStartScale.current * scaleChange), 4);
       setScale(newScale);
-    } else if (e.touches.length === 1 && scale > 1) {
-      // Pan when zoomed in with one finger
-      const touch = e.touches[0];
       
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const x = touch.clientX - rect.left;
-        const y = touch.clientY - rect.top;
-        
-        // Simple panning logic
-        setPosition(prev => ({
-          x: prev.x + (x - prev.x) * 0.05,
-          y: prev.y + (y - prev.y) * 0.05
-        }));
-      }
+      // Also update touch position for subsequent panning
+      setLastTouchPosition({
+        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+        y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+      });
+    } else if (e.touches.length === 1) {
+      // Calculate delta for single-finger pan
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - lastTouchPosition.x;
+      const deltaY = touch.clientY - lastTouchPosition.y;
+      
+      // Apply the pan movement based on delta
+      setPosition(prev => ({
+        x: prev.x + deltaX / scale,
+        y: prev.y + deltaY / scale
+      }));
+      
+      // Update the last touch position
+      setLastTouchPosition({
+        x: touch.clientX,
+        y: touch.clientY
+      });
     }
   };
 
