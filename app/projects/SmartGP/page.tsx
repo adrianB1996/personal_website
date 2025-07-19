@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // Import is used by PlaceholderImage component
 import {
   Card,
@@ -26,7 +26,6 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
-
 
 // Add a new YouTube embed component
 const YouTubeEmbed = ({ videoId, caption }: { videoId: string, caption: string }) => {
@@ -58,25 +57,140 @@ const ImageModal = ({
   imageSrc: string; 
   imageAlt: string; 
 }) => {
+  const [scale, setScale] = useState(1);
+  const [panning, setPanning] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const imageRef = useRef<HTMLImageElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Define refs before conditional returns
+  const touchStartDistance = useRef(0);
+  const touchStartScale = useRef(1);
+
+  // Reset zoom state when modal opens/closes
+  useEffect(() => {
+    if (!isOpen) {
+      setScale(1);
+      setPosition({ x: 0, y: 0 });
+      setPanning(false);
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = -e.deltaY * 0.01;
+    const newScale = Math.min(Math.max(0.5, scale + delta), 4); // Limit zoom between 0.5x and 4x
+    setScale(newScale);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button !== 0) return; // Only left mouse button
+    e.preventDefault();
+    setPanning(true);
+  };
+
+  const handleMouseUp = () => {
+    setPanning(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!panning) return;
+    
+    const mouseDeltaX = e.movementX;
+    const mouseDeltaY = e.movementY;
+    
+    setPosition(prev => ({
+      x: prev.x + mouseDeltaX,
+      y: prev.y + mouseDeltaY
+    }));
+  };
+
+  // Touch event handlers for mobile pinch zoom
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      // Calculate initial distance between two fingers
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touchStartDistance.current = Math.sqrt(dx * dx + dy * dy);
+      touchStartScale.current = scale;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault(); // Prevent scrolling while interacting with image
+    
+    if (e.touches.length === 2) {
+      // Calculate new distance between two fingers
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      // Calculate new scale based on distance change
+      const scaleChange = distance / touchStartDistance.current;
+      const newScale = Math.min(Math.max(0.5, touchStartScale.current * scaleChange), 4);
+      setScale(newScale);
+    } else if (e.touches.length === 1 && scale > 1) {
+      // Pan when zoomed in with one finger
+      const touch = e.touches[0];
+      
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        
+        // Simple panning logic
+        setPosition(prev => ({
+          x: prev.x + (x - prev.x) * 0.05,
+          y: prev.y + (y - prev.y) * 0.05
+        }));
+      }
+    }
+  };
+
+  const handleDoubleClick = () => {
+    // Reset zoom on double click
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
       onClick={onClose}
     >
-      <div className="relative max-w-4xl max-h-full">
+      <div 
+        ref={containerRef}
+        className="relative w-full h-full sm:max-w-[90vw] sm:max-h-[90vh] sm:w-fit sm:h-fit overflow-hidden flex items-center justify-center p-0 sm:p-4"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white hover:text-gray-300 z-10"
         >
-          <X className="h-8 w-8" />
+          <X className="h-6 w-6 sm:h-8 sm:w-8" />
         </button>
+        <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 text-white text-xs sm:text-sm bg-black bg-opacity-50 px-2 py-1 rounded z-10">
+          {scale.toFixed(1)}x zoom • Double-tap to reset
+        </div>
         <img
+          ref={imageRef}
           src={imageSrc}
           alt={imageAlt}
-          className="max-w-full max-h-full object-contain rounded-lg"
-          onClick={(e) => e.stopPropagation()}
+          className="w-full h-full sm:w-auto sm:h-auto object-contain rounded-none sm:rounded-lg sm:min-w-[300px] sm:min-h-[200px] sm:max-h-[90vh] sm:max-w-[90vw] transition-transform duration-100"
+          style={{ 
+            transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
+            cursor: scale > 1 ? 'grab' : 'zoom-in',
+          }}
+          onWheel={handleWheel}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onDoubleClick={handleDoubleClick}
+          draggable={false}
         />
       </div>
     </div>
@@ -86,6 +200,21 @@ const ImageModal = ({
 const SmartGPPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState({ src: "", alt: "" });
+
+  // Add effect to prevent body scrolling when modal is open
+  useEffect(() => {
+    if (modalOpen) {
+      // Save the current overflow value to restore later
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      // Prevent scrolling on the body
+      document.body.style.overflow = 'hidden';
+      
+      // Restore original scroll behavior when component unmounts or modal closes
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [modalOpen]);
 
   const openModal = (src: string, alt: string) => {
     setModalImage({ src, alt });
