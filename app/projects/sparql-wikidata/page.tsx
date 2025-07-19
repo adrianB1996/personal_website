@@ -160,6 +160,8 @@ const ImageModal = ({
         <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 text-white text-xs sm:text-sm bg-black bg-opacity-50 px-2 py-1 rounded z-10">
           {scale.toFixed(1)}x zoom • Double-tap to reset
         </div>
+        
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           ref={imageRef}
           src={imageSrc}
@@ -615,6 +617,7 @@ flowchart TB
           </div>
         </div>
 
-      </section>    </div>
+      </section>
+    </div>
   );
 }
