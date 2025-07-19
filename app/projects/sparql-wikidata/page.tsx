@@ -275,7 +275,7 @@ export default function SparqlWikidataPage() {
               <CardTitle className="text-xl">The Problem</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <p className="font-medium">SPARQL's complexity limits accessibility for non-experts.</p>
+              <p className="font-medium">SPARQL&apos;s complexity limits accessibility for non-experts.</p>
               <div className="space-y-2">
                 <p className="flex items-start gap-2">
                   <ChevronRight className="text-red-500 h-5 w-5 mt-1 flex-shrink-0" />
@@ -289,7 +289,7 @@ export default function SparqlWikidataPage() {
                 </p>
                 <p className="flex items-start gap-2">
                   <ChevronRight className="text-red-500 h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>The semantic web's power remains inaccessible to many potential users.</span>
+                  <span>The semantic web&apos;s power remains inaccessible to many potential users.</span>
                 </p>
               </div>
             </CardContent>
@@ -491,7 +491,9 @@ flowchart TB
               <div className="space-y-2">
                 <p className="flex items-start gap-2">
                   <ChevronRight className="text-primary h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Processes raw Wikidata result sets into natural language</span>
+                  <span>
+                    Processes raw Wikidata result sets into natural language
+                  </span>
                 </p>
                 <p className="flex items-start gap-2">
                   <ChevronRight className="text-primary h-5 w-5 mt-1 flex-shrink-0" />
