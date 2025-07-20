@@ -570,10 +570,27 @@ flowchart TB
 
       <Separator />
 
+      {/* Lessons Learned */}
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold tracking-tight text-center">Lessons Learned</h2>
+        <div className="max-w-3xl mx-auto space-y-4 text-center">
+          <p>
+            <strong>Current Limitations:</strong> The SPARQL Wikidata Explorer is best suited for straightforward, fact-based questions like &quot;What is the population of London?&quot; or &quot;Who is the president of France?&quot;. The model has difficulty with more complex or novel SPARQL queries, even when provided with additional guidance.
+          </p>
+          <p>
+            Interestingly, even when more complex queries like &quot;How many writers were born in 19th-century Germany?&quot; are included in the model file, the small LLM struggles to understand the underlying pattern for creating similar queries. This reveals a fundamental limitation in the model&apos;s ability to generalize from examples rather than simply memorizing specific cases.
+          </p>
+          <p>
+            For best results, simple questions about facts related to people, places, or organizations work best. For anything outside these simple patterns, the tool may return unpredictable results or no results at all.
+          </p>
+        </div>
+      </section>
+
+      <Separator />
+
       {/* Future Enhancements */}
       <section className="space-y-6">
         <h2 className="text-3xl font-bold tracking-tight text-center">Future Enhancements</h2>
-        
         <div className="space-y-4 max-w-2xl mx-auto">
           <div className="flex items-start gap-3">
             <ChevronRight className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
@@ -618,8 +635,17 @@ flowchart TB
               </p>
             </div>
           </div>
-        </div>
 
+          <div className="flex items-start gap-3">
+            <ChevronRight className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+            <div>
+              <p className="font-medium">LoRA Fine-Tuning for Improved Generalization</p>
+              <p className="text-muted-foreground">
+                To help the model handle a broader range of question types and more complex SPARQL queries, a promising next step would be to fine-tune it using the LoRA (Low-Rank Adaptation) method. LoRA enables efficient adaptation of large language models to new tasks with limited data and compute resources. By training on a wider variety of SPARQL question/answer pairs, this approach could help the model learn more generalizable patterns and improve its flexibility for real-world use.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );
