@@ -25,6 +25,11 @@ const projects = [
     href: "/projects/sparql-wikidata",
     description: "Tool for querying and exploring the potential of small local offline LLMs for SPARQL query generation",
   },
+  {
+    title: "AI Game Category Backend",
+    href: "/projects/ai-game-category-backend",
+    description: "Backend-only project using FastAPI & Pydantic for robust API output control.",
+  },
   // {
   //   title: "Aesthetics Website",
   //   href: "/projects/aesthetics",
